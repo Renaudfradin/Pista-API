@@ -6,6 +6,62 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+* @OA\Post(
+*     path="/api/register",
+*     summary="Register a new user",
+*     @OA\Parameter(
+*         name="name",
+*         in="query",
+*         description="User's name",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Parameter(
+*         name="email",
+*         in="query",
+*         description="User's email",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Parameter(
+*         name="password",
+*         in="query",
+*         description="User's password",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="201", description="User registered successfully"),
+*     @OA\Response(response="422", description="Validation errors")
+* )
+*
+* @OA\Post(
+*     path="/api/login",
+*     summary="Authenticate user and generate Bearer token",
+*     @OA\Parameter(
+*         name="email",
+*         in="query",
+*         description="User's email",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Parameter(
+*         name="password",
+*         in="query",
+*         description="User's password",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="Login successful"),
+*     @OA\Response(response="401", description="Invalid credentials")
+* )
+*
+* @OA\Post(
+*     path="/api/logout",
+*     summary="Logout session",
+*     @OA\Response(response="200", description="Logout successful"),
+* )
+*/
 class AuthController extends Controller
 {
     public function login(Request $request)

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->foreignId('task_id');
-            $table->foreignId('todo_id');
+            $table->foreignId('todolist_id');
             $table->string('name');
             $table->timestamp('published_at')->nullable();
         });

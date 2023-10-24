@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         User::truncate();
 
         User::factory()->create();
-        Todolist::factory(10)->create();
-        //Task::factory(10)->create();
+        Todolist::factory()->create();
+        Task::factory(25)->create();
         // category::factory(10)->create();
     }
 }

@@ -9,16 +9,33 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+* @OA\Get(
+*     path="/api/me",
+*     summary="User page",
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="Success"),
+* )
+
+* @OA\Delete(
+*     path="/api/users/{id}",
+*     summary="Delete User",
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="User delete"),
+* )
+*/
+
 class UserController extends Controller
 {
     use HasApiTokens, HasFactory, Notifiable;
-    // public function destroy(User $id)
-    // {
-    //     $id->delete();
-
-    //     return response()->json(['message' => 'User delete'], 200);
-    // }
-
+    
     public function me(Request $request)
     {
         $user = $request->user();
@@ -48,5 +65,12 @@ class UserController extends Controller
             'token_type' => 'Bearer',
             'message' => 'Usser Updated'
         ], 201);
+    }
+
+    public function destroy(User $id)
+    {
+        $id->delete();
+
+        return response()->json(['message' => 'User delete'], 200);
     }
 }

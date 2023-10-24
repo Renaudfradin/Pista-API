@@ -19,7 +19,9 @@ class TaskFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'todo_id' => Todolist::factory(),
+            'todolist_id' => Todolist::factory(),
+            'complete' => $this->faker->boolean(),
+            'published_at' => $this->faker->date()
         ];
     }
 }

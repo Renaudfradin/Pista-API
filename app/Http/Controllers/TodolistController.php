@@ -5,63 +5,69 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTodolistRequest;
 use App\Http\Requests\UpdateTodolistRequest;
 use App\Models\Todolist;
-use Illuminate\Support\Facades\Request;
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class TodolistController extends Controller
 {
-    public function index()
+    public function todolist(Request $request)
     {
-        $todos = Todolist::all();
-
-        return response()->json($todos, 200);
+        $userId = $request->user()->id;
+        $todos = Todolist::where('user_id', $userId)->get();
+        $tasks = [ ];
+        foreach ($todos as $todo) { 
+            $tasks = $todo->tasks;
+        }
+        return response()->json(
+            ['todoList' => $todos]
+        ,200);
     }
 
-    // public function store(Request $request)
-    // {
-    //     $this->validate($request, [
-    //         'name' => 'required|max:255|min:3',
-    //         'email' => 'required|max:255|min:3|email|unique:users,email',
-    //         'password' => 'required|max:255|min:5',
-    //     ]);
+    public function todo(Request $request, Todolist $id)
+    {
+        $todo = Todolist::where('user_id', 2);
+        dd($todo);
+        $tasks = Todolist::find(2)->tasks;
+        return response()->json(['todoList' => $todo, 'tasks' => $tasks], 200);
+    }
+    
 
-    //     $user = User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => bcrypt($request->password)
-    //     ]);
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255|min:3',
+        ]);
 
-    //     return response()->json(['message' => 'User created'], 201);
-    // }
+        $user = Todolist::create([
+            'name' => $request->name,
+            'chek' => $request->chek,
+            'user_id' => $request->user()->id,
+            'published_at' => date('Y-m-d H:i:s')
+        ]);
 
-    // public function show(User $id)
-    // {
-    //     $user = User::find($id);
+        return response()->json(['message' => 'Todolist created'], 201);
+    }
 
-    //     return response()->json($user, 200);
-    // }
+    public function update(Request $request, Todolist $id)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255|min:3',
+        ]);
 
-    // public function update(Request $request, User $id)
-    // {
+        dd($id);
+        $id->update([
+            'name' => $request->name,
+            'chek' => $request->chek,
+        ]);
 
-    //     $this->validate($request, [
-    //         'name' => 'required|max:255|min:3',
-    //         'email' => 'required|max:255|min:3|email',
-    //         'password' => 'required|max:255|min:5',
-    //     ]);
+        return response()->json(['message' => 'TodoList updated'], 400);
+    }
 
-    //     $id->update([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => bcrypt($request->password)
-    //     ]);
+    public function destroy(Todolist $id)
+    {
+        $id->delete();
 
-    //     return response()->json(['message' => 'User updated'], 400);
-    // }
-
-    // public function destroy(User $id)
-    // {
-    //     $id->delete();
-
-    //     return response()->json(['message' => 'User delete'], 200);
-    // }
+        return response()->json(['message' => 'Todoliste delete'], 200);
+    }
 }

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('todolists', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('task_id');
+            $table->foreignId('task_id')->nullable();
             $table->foreignId('user_id');
             $table->string('name');
-            $table->boolean('chek');
+            $table->boolean('complete');
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });

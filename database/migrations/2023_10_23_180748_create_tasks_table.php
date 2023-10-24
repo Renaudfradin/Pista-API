@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('todo_id');
+            $table->foreignId('todolist_id');
             $table->string('name');
-            $table->boolean('chek');
+            $table->boolean('complete');
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });

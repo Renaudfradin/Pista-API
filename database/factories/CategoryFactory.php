@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'todo_id' => Todolist::factory(),
+            'todolist_id' => Todolist::factory(),
             'task_id' => Task::factory(),
         ];
     }
