@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Todolist;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -40,8 +41,12 @@ class UserController extends Controller
     {
         $user = $request->user();
         $todoList = $user->todoLists->all();
+        $todoListCount = $user->todoLists->count();
 
-        return response()->json(['userInfo' => $user], 200);
+        return response()->json([
+            'userInfo' => $user, 
+            'countTodo' => $todoListCount
+        ], 200);
     }
 
     public function update(Request $request, User $id)
