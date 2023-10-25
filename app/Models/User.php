@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $fillable = ['name', 'email', 'created_at', 'updated_at', 'remember_token', 'age', 'gender', 'password'];
+
     public function todoLists(): HasMany
     {
         return $this->hasMany(Todolist::class);

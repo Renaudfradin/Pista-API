@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use App\Models\Todolist;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -15,55 +16,57 @@ class TaskController extends Controller
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function test() {
-        return response()->json('dddd');
+    public function show(Task $id)
+    {
+        $task = $id;
+        return response()->json([ 
+            'task' => $task
+        ], 200);
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
+    public function createTask(Request $request, TodoList $idtodo)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:255|min:3',
+        ]);
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(StoreTaskRequest $request)
-    // {
-    //     //
-    // }
+        $task = Task::create([
+            'name' => $request->name,
+            'todolist_id' => $idtodo->id,
+            'complete' => 0,
+            'user_id' => $request->user()->id,
+            'published_at' => date('Y-m-d H:i:s'),
+        ]);
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Task $task)
-    // {
-    //     //
-    // }
+        return response()->json([
+            'message' => 'Task created',
+            'task' => $task
+        ], 201);
+    }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(Task $task)
-    // {
-    //     //
-    // }
+    public function updateTask(Request $request, Task $id, TodoList $idtodo)
+    {
+        //dd($request->user()->id);
+        $userId = $request->user()->id;
+        $id->update([
+            'name' => $request->name,
+            'todolist_id' => $idtodo->id,
+            'complete' => $request->complete,
+            'user_id' => $userId,
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(UpdateTaskRequest $request, Task $task)
-    // {
-    //     //
-    // }
+        return response()->json([
+            'message' => 'Task updated'
+        ], 200);
+    }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Task $task)
-    // {
-    //     //
-    // }
+    public function destroy(Task $id)
+    {
+        $id->delete();
+
+        return response()->json([
+            'message' => 'Task delete'
+        ], 200);
+    }
 }

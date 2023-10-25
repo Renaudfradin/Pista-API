@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Todolist;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'todolist_id' => Todolist::factory(),
+            'user_id' => User::factory(),
             'complete' => $this->faker->boolean(),
             'published_at' => $this->faker->date()
         ];

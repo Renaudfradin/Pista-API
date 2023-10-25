@@ -26,8 +26,8 @@ Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::put('/users/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
-Route::delete('/users/{id}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
+Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware('auth:sanctum');
 
 //* Todo list */
 Route::get('/todolist', [TodolistController::class, 'todolist'])->middleware('auth:sanctum');
@@ -37,10 +37,10 @@ Route::put('/todo/{id}', [TodolistController::class, 'update'])->middleware('aut
 Route::delete('/todo/{id}', [TodolistController::class, 'destroy'])->middleware('auth:sanctum');
 
 //* Task */
-Route::get('/task', [TaskController::class, ''])->middleware('auth:sanctum');
-Route::post('/task', [TaskController::class, ''])->middleware('auth:sanctum');
-Route::put('/task', [TaskController::class, ''])->middleware('auth:sanctum');
-Route::delete('/task', [TaskController::class, ''])->middleware('auth:sanctum');
+Route::get('/task/{id}', [TaskController::class, 'show'])->middleware('auth:sanctum');
+Route::post('/{idtodo}/task', [TaskController::class, 'createTask'])->middleware('auth:sanctum');
+Route::put('/task/{id}', [TaskController::class, 'updateTask'])->middleware('auth:sanctum');
+Route::delete('/task/{id}', [TaskController::class, 'destroy'])->middleware('auth:sanctum');
 
 //* Category */
 // Route::get('/register', [CategoryController::class, '']);

@@ -46,7 +46,6 @@ class TodolistController extends Controller
 
         $user = Todolist::create([
             'name' => $request->name,
-            'chek' => $request->chek,
             'user_id' => $request->user()->id,
             'published_at' => date('Y-m-d H:i:s')
         ]);
@@ -58,14 +57,8 @@ class TodolistController extends Controller
 
     public function update(Request $request, Todolist $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255|min:3',
-        ]);
-
-        dd($id);
         $id->update([
             'name' => $request->name,
-            'chek' => $request->chek,
         ]);
 
         return response()->json([

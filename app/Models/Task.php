@@ -12,4 +12,5 @@ class Task extends Model
 
     protected $guarded = [ ];
 
+    protected $fillable = ['name', 'complete', 'created_at', 'updated_at', 'published_at', 'user_id', 'todolist_id'];
 }

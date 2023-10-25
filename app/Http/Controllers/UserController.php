@@ -45,29 +45,21 @@ class UserController extends Controller
 
         return response()->json([
             'userInfo' => $user, 
-            'countTodo' => $todoListCount
+            'countTodo' => $todoListCount,
         ], 200);
     }
 
     public function update(Request $request, User $id)
     {
-        $this->validate($request, [
-            'name' => 'required|max:255|min:3',
-            'email' => 'required|max:255|min:3|email',
-            'password' => 'required|max:255|min:5',
-        ]);
-
         $id->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'age' => $request->age,
+            'gender' => $request->gender
         ]);
 
-        $token = $id->createToken('auth_token')->plainTextToken;
-
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
             'message' => 'Usser Updated'
         ], 201);
     }
