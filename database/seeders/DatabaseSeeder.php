@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create();
         Todolist::factory()->create();
-        Task::factory(25)->create();
+        Task::factory(50)->create();
         // category::factory(10)->create();
     }
 }

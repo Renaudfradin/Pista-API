@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$PImikHah0f9zhkJ1Nex8HuZtFcDWfrFTaQiBoLe6E44QbYYCFmaty',
             'remember_token' => Str::random(10),
-            'gender' => Str::random(10),
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'age' => random_int(1, 100)
         ];
     }

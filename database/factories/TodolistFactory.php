@@ -21,7 +21,7 @@ class TodolistFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'user_id' => User::factory(),
-            'task_id' => random_int(1, 15),
+            'task_id' => random_int(1, 50),
             'complete' => $this->faker->boolean(),
             'published_at' => $this->faker->date()
         ];
