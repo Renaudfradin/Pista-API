@@ -43,7 +43,7 @@ Route::put('/task/{id}', [TaskController::class, 'updateTask'])->middleware('aut
 Route::delete('/task/{id}', [TaskController::class, 'destroy'])->middleware('auth:sanctum');
 
 //* Category */
-// Route::get('/register', [CategoryController::class, '']);
-// Route::post('/register', [CategoryController::class, '']);
-// Route::put('/register', [CategoryController::class, '']);
-// Route::delete('/register', [CategoryController::class, '']);
+//Route::get('/category/{id}', [CategoryController::class, ''])->middleware('auth:sanctum');
+//Route::post('/category/{id}', [CategoryController::class, ''])->middleware('auth:sanctum');
+//Route::put('/category/{id}', [CategoryController::class, ''])->middleware('auth:sanctum');
+Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
