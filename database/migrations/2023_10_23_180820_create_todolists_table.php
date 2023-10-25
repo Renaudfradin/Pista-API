@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('task_id')->nullable();
             $table->foreignId('user_id');
             $table->string('name');
-            $table->boolean('complete');
             $table->timestamps();
             $table->timestamp('published_at')->nullable();
         });
