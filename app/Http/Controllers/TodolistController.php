@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTodolistRequest;
-use App\Http\Requests\UpdateTodolistRequest;
 use App\Models\Todolist;
 use App\Models\Task;
 use App\Models\User;
@@ -16,22 +14,29 @@ class TodolistController extends Controller
         $userId = $request->user()->id;
         $todos = Todolist::where('user_id', $userId)->get();
         $tasks = [ ];
+
         foreach ($todos as $todo) { 
             $tasks = $todo->tasks;
         }
-        return response()->json(
-            ['todoList' => $todos]
-        ,200);
+
+        return response()->json([
+            'todoList' => $todos
+        ], 200);
     }
 
     public function todo(Request $request, Todolist $id)
     {
-        $todo = Todolist::where('user_id', 2);
-        dd($todo);
-        $tasks = Todolist::find(2)->tasks;
-        return response()->json(['todoList' => $todo, 'tasks' => $tasks], 200);
+        $todo = $request->id;
+        $tasks = $todo->tasks;
+        $tasksCount = $todo->tasks->count();
+        $completeTasks = $todo->tasks->where('complete', true)->count();
+
+        return response()->json([ 
+            'todo' => $todo,
+            'taskscount' => $tasksCount,
+            'completetasks' => $completeTasks,
+        ], 200);
     }
-    
 
     public function store(Request $request)
     {
@@ -46,7 +51,9 @@ class TodolistController extends Controller
             'published_at' => date('Y-m-d H:i:s')
         ]);
 
-        return response()->json(['message' => 'Todolist created'], 201);
+        return response()->json([
+            'message' => 'Todolist created'
+        ], 201);
     }
 
     public function update(Request $request, Todolist $id)
@@ -61,13 +68,17 @@ class TodolistController extends Controller
             'chek' => $request->chek,
         ]);
 
-        return response()->json(['message' => 'TodoList updated'], 400);
+        return response()->json([
+            'message' => 'TodoList updated'
+        ], 400);
     }
 
     public function destroy(Todolist $id)
     {
         $id->delete();
 
-        return response()->json(['message' => 'Todoliste delete'], 200);
+        return response()->json([
+            'message' => 'Todoliste delete'
+        ], 200);
     }
 }

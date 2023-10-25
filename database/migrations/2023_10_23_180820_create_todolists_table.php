@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('todolists', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('task_id')->nullable();
             $table->foreignId('user_id');
             $table->string('name');
             $table->timestamps();
