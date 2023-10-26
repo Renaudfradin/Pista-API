@@ -14,21 +14,23 @@ use Laravel\Sanctum\HasApiTokens;
 * @OA\Get(
 *     path="/api/me",
 *     summary="User page",
+*     tags={"User"},
 *     security={{"bearerAuth":{}}},
 *     @OA\Response(response="200", description="Success"),
 * )
-
+*
 * @OA\Delete(
 *     path="/api/users/{id}",
 *     summary="Delete User",
+*     tags={"User"},
+*     security={{"bearerAuth":{}}},
 *     @OA\Parameter(
-*         name="",
+*         name="id",
 *         in="query",
 *         description="User Id",
 *         required=true,
 *         @OA\Schema(type="string")
 *     ),
-*     security={{"bearerAuth":{}}},
 *     @OA\Response(response="200", description="User delete"),
 * )
 */
@@ -60,7 +62,7 @@ class UserController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'Usser Updated'
+            'message' => 'User Updated'
         ], 201);
     }
 
@@ -68,6 +70,8 @@ class UserController extends Controller
     {
         $id->delete();
 
-        return response()->json(['message' => 'User delete'], 200);
+        return response()->json([
+            'message' => 'User delete'
+        ], 200);
     }
 }

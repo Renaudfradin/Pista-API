@@ -6,6 +6,23 @@ use App\Http\Requests\StorecategoryRequest;
 use App\Http\Requests\UpdatecategoryRequest;
 use App\Models\Category;
 
+/**
+* @OA\Delete(
+*     path="/api/category/{id}",
+*     summary="Category delete",
+*     tags={"Category"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="Category delete"),
+* )
+*/
+
 class CategoryController extends Controller
 {
     public function destroy(Category $id)
@@ -13,7 +30,7 @@ class CategoryController extends Controller
         $id->delete();
 
         return response()->json([
-            'message' => 'Todoliste delete'
+            'message' => 'Category delete'
         ], 200);
     }
 }

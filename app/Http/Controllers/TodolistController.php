@@ -7,6 +7,69 @@ use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+/**
+* @OA\Get(
+*     path="/api/todolist",
+*     summary="Todolists page",
+*     tags={"Todo"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="Success"),
+* )
+*
+* @OA\Get(
+*     path="/api/todo/{1}",
+*     summary="Todolist page",
+*     tags={"Todo"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="Success"),
+* )
+*
+* @OA\Post(
+*     path="/api/todo",
+*     summary="Register a new Todolist",
+*     tags={"Todo"},
+*     @OA\Parameter(
+*         name="name",
+*         in="query",
+*         description="User's name",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="201", description="Todolist registered successfully"),
+*     @OA\Response(response="422", description="Validation errors")
+* )
+*
+* @OA\Put(
+*     path="/api/user/{id}",
+*     summary="Update User",
+*     tags={"Todo"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="User delete"),
+* )
+*
+* @OA\Delete(
+*     path="/api/todo/{id}",
+*     summary="Delete Todolist",
+*     tags={"Todo"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="Todoliste delete"),
+* )
+*/
+
 class TodolistController extends Controller
 {
     public function todolist(Request $request)

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 * @OA\Post(
 *     path="/api/register",
 *     summary="Register a new user",
+*     tags={"User"},
 *     @OA\Parameter(
 *         name="name",
 *         in="query",
@@ -38,6 +39,7 @@ use Illuminate\Support\Facades\Auth;
 * @OA\Post(
 *     path="/api/login",
 *     summary="Authenticate user and generate Bearer token",
+*     tags={"User"},
 *     @OA\Parameter(
 *         name="email",
 *         in="query",
@@ -59,7 +61,9 @@ use Illuminate\Support\Facades\Auth;
 * @OA\Post(
 *     path="/api/logout",
 *     summary="Logout session",
-*     @OA\Response(response="200", description="Logout successful"),
+*     tags={"User"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="Successfully logged out"),
 * )
 */
 class AuthController extends Controller

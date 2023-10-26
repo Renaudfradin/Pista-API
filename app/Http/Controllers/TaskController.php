@@ -12,6 +12,61 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+* @OA\Get(
+*     path="/api/task/{id}",
+*     summary="Task page",
+*     tags={"Task"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Response(response="200", description="Success"),
+* )
+*
+* @OA\Post(
+*     path="/api/{id}/task",
+*     summary="Register a new Task",
+*     tags={"Task"},
+*     @OA\Parameter(
+*         name="name",
+*         in="query",
+*         description="Task's name",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="201", description="Todolist registered successfully"),
+*     @OA\Response(response="422", description="Validation errors")
+* )
+*
+* @OA\Put(
+*     path="0/api/task/{id}",
+*     summary="Update User",
+*     tags={"Task"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="User delete"),
+* )
+*
+* @OA\Delete(
+*     path="/api/task/{id}",
+*     summary="Delete Todolist",
+*     tags={"Task"},
+*     security={{"bearerAuth":{}}},
+*     @OA\Parameter(
+*         name="",
+*         in="query",
+*         description="User Id",
+*         required=true,
+*         @OA\Schema(type="string")
+*     ),
+*     @OA\Response(response="200", description="Todoliste delete"),
+* )
+*/
+
 class TaskController extends Controller
 {
     use HasApiTokens, HasFactory, Notifiable;

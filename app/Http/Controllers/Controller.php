@@ -11,6 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
  *    title="Api Pista",
  *    version="1.0.0",
  * )
+ * 
  * @OA\SecurityScheme(
  *     type="http",
  *     securityScheme="bearerAuth",

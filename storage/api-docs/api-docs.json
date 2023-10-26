@@ -7,6 +7,9 @@
     "paths": {
         "/api/register": {
             "post": {
+                "tags": [
+                    "User"
+                ],
                 "summary": "Register a new user",
                 "parameters": [
                     {
@@ -49,6 +52,9 @@
         },
         "/api/login": {
             "post": {
+                "tags": [
+                    "User"
+                ],
                 "summary": "Authenticate user and generate Bearer token",
                 "parameters": [
                     {
@@ -82,16 +88,291 @@
         },
         "/api/logout": {
             "post": {
+                "tags": [
+                    "User"
+                ],
                 "summary": "Logout session",
                 "responses": {
                     "200": {
-                        "description": "Logout successful"
+                        "description": "Successfully logged out"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/category/{id}": {
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Category delete",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Category delete"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/": {
+            "get": {
+                "tags": [
+                    "Home"
+                ],
+                "summary": "Home page",
+                "responses": {
+                    "200": {
+                        "description": "Success"
                     }
                 }
             }
         },
+        "/api/task/{id}": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task page",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Delete Todolist",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todoliste delete"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/{id}/task": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Register a new Task",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Task's name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Todolist registered successfully"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "0/api/task/{id}": {
+            "put": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User delete"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/todolist": {
+            "get": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Todolists page",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/todo/{1}": {
+            "get": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Todolist page",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/todo": {
+            "post": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Register a new Todolist",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "User's name",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Todolist registered successfully"
+                    },
+                    "422": {
+                        "description": "Validation errors"
+                    }
+                }
+            }
+        },
+        "/api/user/{id}": {
+            "put": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User delete"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/todo/{id}": {
+            "delete": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Delete Todolist",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "query",
+                        "description": "User Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todoliste delete"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/me": {
             "get": {
+                "tags": [
+                    "User"
+                ],
                 "summary": "User page",
                 "responses": {
                     "200": {
@@ -105,12 +386,15 @@
                 ]
             }
         },
-        "/api/users/": {
+        "/api/users/{id}": {
             "delete": {
+                "tags": [
+                    "User"
+                ],
                 "summary": "Delete User",
                 "parameters": [
                     {
-                        "name": "",
+                        "name": "id",
                         "in": "query",
                         "description": "User Id",
                         "required": true,

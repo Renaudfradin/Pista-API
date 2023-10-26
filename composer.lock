@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bdfd4e546ca82e5f48a8ac6ee3359c97",
+    "content-hash": "8a14afc49f59f395a31ffabf8bacd7f4",
     "packages": [
         {
             "name": "brick/math",
@@ -657,6 +657,50 @@
                 }
             ],
             "time": "2023-10-12T05:21:21+00:00"
+        },
+        {
+            "name": "g4t/swagger",
+            "version": "2.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hussein4alaa/laravel-g4t-swagger-auto-generate.git",
+                "reference": "e1322d8394b1290ed9beb7d59f3efac4847ee144"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hussein4alaa/laravel-g4t-swagger-auto-generate/zipball/e1322d8394b1290ed9beb7d59f3efac4847ee144",
+                "reference": "e1322d8394b1290ed9beb7d59f3efac4847ee144",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "G4T\\Swagger\\SwaggerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "G4T\\Swagger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hussein Alaa",
+                    "email": "hussein4alaa@gmail.com"
+                }
+            ],
+            "description": "g4t laravel swagger",
+            "support": {
+                "issues": "https://github.com/hussein4alaa/laravel-g4t-swagger-auto-generate/issues",
+                "source": "https://github.com/hussein4alaa/laravel-g4t-swagger-auto-generate/tree/2.0.6"
+            },
+            "time": "2023-10-12T07:30:19+00:00"
         },
         {
             "name": "graham-campbell/result-type",
