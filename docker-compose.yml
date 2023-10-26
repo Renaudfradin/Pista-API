@@ -1,22 +1,65 @@
-version: '2'
-
+version: '3.8'
 services:
-  mariadb:
-    image: docker.io/bitnami/mariadb:11.1
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - MARIADB_USER=bn_myapp
-      - MARIADB_DATABASE=bitnami_myapp
-  myapp:
-    image: docker.io/bitnami/laravel:10
-    ports:
-      - '8000:8000'
-    environment:
-      - DB_HOST=mariadb
-      - DB_PORT=3306
-      - DB_USERNAME=bn_myapp
-      - DB_DATABASE=bitnami_myapp
+  main:
+    container_name: Serve
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'php artisan serve --host=0.0.0.0'
     volumes:
-      - './:/pistatest'
+      - .:/app
+    ports:
+      - 8000:8000
+
+  queue:
+    container_name: Queue
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'php artisan queue:work'
     depends_on:
-      - mariadb
+      - db
+
+  db:
+    # platform: linux/x86_64
+    image: mysql:8.0
+    container_name: Database
+    environment:
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: PhpMyAdmin
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: MailPit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - laravel-exa
+
+networks:
+  laravel-exa:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local
